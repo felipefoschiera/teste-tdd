@@ -102,8 +102,9 @@ class ContaTest(TestCase):
         self.assertEqual(joao.getSaldo(), depoisJoao) # verifica se o saldo ficou igual
         self.assertEqual(artur.getSaldo(), depoisArtur) # verifica se o saldo ficou igual
 
-class HistoricoTest(TestCase):
 
+class HistoricoTest(TestCase):
+    # verifica se o historico é criado no banco
     def test_historicoCriado(self):
         
         quant_transferir = 5
@@ -120,6 +121,24 @@ class HistoricoTest(TestCase):
         id_hist = historico.id
 
         self.assertTrue(existeHistorico(id_hist))
+
+    # verifica se o valor transferido foi setado corretamente no banco
+    def test_historicoValorSetado(self):
+
+        quant_transferir = 5
+        joao = getConta('joao@gmail.com')
+        joao.setSaldo(10)
+
+        email_destino = 'artur@gmail.com'
+        artur = getConta(email_destino)
+        
+        joao.transferir(artur, quant_transferir);
+
+        historico = insereHistorico(joao, artur, quant_transferir)
+
+        valor_banco = findValorHistorico(historico.id)
+
+        self.assertEqual(quant_transferir, valor_banco)
         
 
 if __name__ == '__main__':

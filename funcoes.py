@@ -18,3 +18,10 @@ def existeHistorico(id):
     if len(objs) == 0:
         return False
     return True
+
+def findValorHistorico(id):
+    pass
+    # objs = list(Historico.objects(id=id))
+    # if len(objs) == 0:
+    #     return False
+    # return objs[0].valorTransferido
