@@ -9,3 +9,13 @@ def getConta(enderecoEmail):
     if len(contas) == 0:
         return False
     return contas[0]
+
+def insereHistorico(conta1, conta2, valor):
+    return Historico(contaEnviou=conta1, contaRecebeu=conta2, valorTransferido=valor).save()
+
+def existeHistorico(id):
+    pass
+    # objs = list(Historico.objects(id=id))
+    # if len(objs) == 0:
+    #     return False
+    # return True

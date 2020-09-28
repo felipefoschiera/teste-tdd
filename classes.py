@@ -28,3 +28,32 @@ class Conta(Document):
         conta.adicionaSaldo(valor) 
         self.save()
         conta.save()
+
+class Historico(Document):
+
+    contaEnviou = ReferenceField(Conta)
+    contaRecebeu = ReferenceField(Conta)
+    valorTransferido = FloatField(required=True)
+
+    def setContaEnviou(self, conta):
+        self.contaEnviou = conta
+        self.save()
+        
+    def getContaEnviou(self):
+        return self.contaEnviou
+
+    def setcontaRecebeu(self, conta):
+        self.contaRecebeu = conta
+        self.save()
+
+    def getContaRecebeu(self):
+        return self.contaRecebeu
+
+    def setValorTransferido(self, valor):
+        self.valorTransferido = valor
+        self.save()
+
+    def getValorTransferido(self):
+        return self.valorTransferido
+
+
